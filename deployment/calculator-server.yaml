@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calculator-server
+  labels:
+    app: calculator-server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: calculator-server
+  template:
+    metadata:
+      labels:
+        app: calculator-server
+    spec:
+      containers:
+      - name: calculator-server
+        image: calculator-server:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: calculator-server
+spec:
+  selector:
+    app: calculator-server
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

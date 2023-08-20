@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  calculator-server:
+    image: calculator-server:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+
+  calculator-client:
+    image: calculator-client:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.client
